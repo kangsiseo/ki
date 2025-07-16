@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful - ArtVerify</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <h1 class="logo">🎨 ArtVerify</h1>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="success-section">
+            <div class="container">
+                <div class="success-content">
+                    <div class="success-icon">✅</div>
+                    <h1>Payment Successful!</h1>
+                    <p>Thank you for your purchase. You can now upload your artwork for analysis.</p>
+                    <button class="cta-button" onclick="proceedToUpload()">Start Art Analysis</button>
+                    <p class="small-text">Your analysis session is now active and ready to use.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function proceedToUpload() {
+            localStorage.setItem('artVerifyPaid', 'true');
+            window.location.href = 'index.html#upload-section';
+        }
+        
+        // Auto-redirect after 5 seconds
+        setTimeout(() => {
+            proceedToUpload();
+        }, 5000);
+    </script>
+
+    <style>
+        .success-section {
+            padding: 120px 20px 80px;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .success-content {
+            max-width: 500px;
+        }
+        
+        .success-icon {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+        }
+        
+        .success-content h1 {
+            font-size: 2.5rem;
+            color: #10b981;
+            margin-bottom: 1rem;
+        }
+        
+        .success-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #666;
+        }
+        
+        .small-text {
+            font-size: 0.9rem !important;
+            color: #999 !important;
+            margin-top: 1rem !important;
+        }
+    </style>
+</body>
+</html>

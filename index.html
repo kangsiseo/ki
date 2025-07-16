@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArtVerify - AI-Powered Art Authentication</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <h1 class="logo">🎨 ArtVerify</h1>
+                <div class="nav-links">
+                    <a href="#home">Home</a>
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="#pricing">Pricing</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Authenticate Your Art with AI</h1>
+                <p>Professional-grade art verification powered by advanced AI technology. Get instant analysis of your artwork's authenticity.</p>
+                <button class="cta-button" onclick="startVerification()">Start Verification - $9.99</button>
+            </div>
+            <div class="hero-image">
+                <div class="art-preview">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2Y4ZjlmYSIgc3Ryb2tlPSIjZGRkIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8dGV4dCB4PSIxNTAiIHk9IjEwMCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE4IiBmaWxsPSIjNjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5Zb3VyIEFydHdvcms8L3RleHQ+Cjwvc3ZnPgo=" alt="Artwork Preview">
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section id="how-it-works" class="how-it-works">
+            <div class="container">
+                <h2>How It Works</h2>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Pay Securely</h3>
+                        <p>Complete your payment through our secure Stripe checkout</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>Upload Image</h3>
+                        <p>Upload a high-quality photo of your artwork</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>AI Analysis</h3>
+                        <p>Our advanced AI analyzes your artwork for authenticity</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h3>Get Results</h3>
+                        <p>Receive detailed analysis report with authenticity score</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="pricing">
+            <div class="container">
+                <h2>Simple Pricing</h2>
+                <div class="pricing-card">
+                    <h3>Art Verification</h3>
+                    <div class="price">$9.99</div>
+                    <p>per analysis</p>
+                    <ul>
+                        <li>✓ AI-powered authenticity analysis</li>
+                        <li>✓ Detailed PDF report</li>
+                        <li>✓ Expert-level accuracy</li>
+                        <li>✓ 24/7 support</li>
+                    </ul>
+                    <button class="pricing-button" onclick="startVerification()">Get Started</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Upload Section (Hidden initially) -->
+        <section id="upload-section" class="upload-section" style="display: none;">
+            <div class="container">
+                <h2>Upload Your Artwork</h2>
+                <div class="upload-area" id="upload-area">
+                    <div class="upload-content">
+                        <div class="upload-icon">📁</div>
+                        <p>Drag and drop your artwork image here</p>
+                        <p>or</p>
+                        <button class="upload-button" onclick="document.getElementById('file-input').click()">Choose File</button>
+                        <input type="file" id="file-input" accept="image/*" style="display: none;" onchange="handleFileSelect(event)">
+                        <small>Supported formats: JPG, PNG, WEBP (Max 10MB)</small>
+                    </div>
+                </div>
+                <div id="analysis-progress" class="analysis-progress" style="display: none;">
+                    <h3>Analyzing Your Artwork...</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <p id="progress-text">Initializing analysis...</p>
+                </div>
+                <div id="results-section" class="results-section" style="display: none;">
+                    <h3>Analysis Results</h3>
+                    <div class="result-card">
+                        <div class="authenticity-score">
+                            <h4>Authenticity Score</h4>
+                            <div class="score-circle">
+                                <span id="authenticity-percentage">--</span>%
+                            </div>
+                        </div>
+                        <div class="analysis-details">
+                            <h4>Analysis Details</h4>
+                            <div id="analysis-text"></div>
+                            <button class="download-button" onclick="downloadReport()">Download PDF Report</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 ArtVerify. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Service</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
