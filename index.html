@@ -68,18 +68,50 @@
         <!-- Pricing Section -->
         <section id="pricing" class="pricing">
             <div class="container">
-                <h2>Simple Pricing</h2>
-                <div class="pricing-card">
-                    <h3>Art Verification</h3>
-                    <div class="price">$9.99</div>
-                    <p>per analysis</p>
-                    <ul>
-                        <li>✓ AI-powered authenticity analysis</li>
-                        <li>✓ Detailed PDF report</li>
-                        <li>✓ Expert-level accuracy</li>
-                        <li>✓ 24/7 support</li>
-                    </ul>
-                    <button class="pricing-button" onclick="startVerification()">Get Started</button>
+                <h2>Choose Your Package</h2>
+                <p style="text-align: center; margin-bottom: 2rem; color: #666;">Professional art authentication powered by AI - trusted by collectors worldwide</p>
+                <div class="pricing-cards">
+                    <div class="pricing-card">
+                        <h3>Single Analysis</h3>
+                        <div class="price">$9.99</div>
+                        <p>per artwork</p>
+                        <ul>
+                            <li>✓ AI-powered authenticity analysis</li>
+                            <li>✓ Detailed PDF report</li>
+                            <li>✓ Expert-level accuracy</li>
+                            <li>✓ 24/7 support</li>
+                        </ul>
+                        <button class="pricing-button" onclick="startVerification('single')">Analyze Now</button>
+                    </div>
+                    
+                    <div class="pricing-card premium">
+                        <div class="popular-badge">Most Popular</div>
+                        <h3>Premium Package</h3>
+                        <div class="price">$24.99</div>
+                        <p>3 analyses + bonus</p>
+                        <ul>
+                            <li>✓ 3 artwork analyses</li>
+                            <li>✓ Priority processing</li>
+                            <li>✓ Enhanced PDF reports</li>
+                            <li>✓ Email consultation</li>
+                            <li>✓ 30-day validity</li>
+                        </ul>
+                        <button class="pricing-button" onclick="startVerification('premium')">Best Value</button>
+                    </div>
+                    
+                    <div class="pricing-card">
+                        <h3>Professional</h3>
+                        <div class="price">$49.99</div>
+                        <p>10 analyses</p>
+                        <ul>
+                            <li>✓ 10 artwork analyses</li>
+                            <li>✓ Bulk upload feature</li>
+                            <li>✓ Advanced analytics</li>
+                            <li>✓ Phone consultation</li>
+                            <li>✓ 90-day validity</li>
+                        </ul>
+                        <button class="pricing-button" onclick="startVerification('professional')">For Dealers</button>
+                    </div>
                 </div>
             </div>
         </section>

@@ -31,14 +31,33 @@
 
     <script>
         function proceedToUpload() {
+            // Get session ID from URL if available
+            const urlParams = new URLSearchParams(window.location.search);
+            const sessionId = urlParams.get('session_id');
+            
             localStorage.setItem('artVerifyPaid', 'true');
-            window.location.href = 'index.html#upload-section';
+            if (sessionId) {
+                localStorage.setItem('sessionId', sessionId);
+            }
+            
+            // Redirect to main page with payment success parameters
+            window.location.href = `index.html?payment_success=true&session_id=${sessionId || 'manual'}`;
         }
         
-        // Auto-redirect after 5 seconds
+        // Auto-redirect after 3 seconds
         setTimeout(() => {
             proceedToUpload();
-        }, 5000);
+        }, 3000);
+        
+        // Also check URL parameters on load
+        window.addEventListener('load', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('session_id')) {
+                // This is a real Stripe redirect
+                document.querySelector('.success-content p').textContent = 
+                    'Payment confirmed! Redirecting you to the art analysis service...';
+            }
+        });
     </script>
 
     <style>

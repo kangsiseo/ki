@@ -187,15 +187,46 @@ body {
     color: #333;
 }
 
-.pricing-card {
-    max-width: 400px;
+.pricing-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
     margin: 0 auto;
+}
+
+.pricing-card {
     background: white;
     border-radius: 20px;
-    padding: 3rem 2rem;
+    padding: 2.5rem 2rem;
     text-align: center;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border: 2px solid #e5e7eb;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.pricing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.pricing-card.premium {
     border: 3px solid #6366f1;
+    transform: scale(1.05);
+}
+
+.popular-badge {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #6366f1;
+    color: white;
+    padding: 5px 20px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
 }
 
 .pricing-card h3 {

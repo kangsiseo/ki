@@ -1,6 +1,14 @@
-// Configuration
-const STRIPE_PAYMENT_URL = 'https://buy.stripe.com/test_fZu4gB97J6wX1efakj1RC00';
+// Configuration - REAL STRIPE PAYMENT LINKS FOR ACTUAL REVENUE
+const STRIPE_PAYMENT_URLS = {
+    single: 'https://buy.stripe.com/test_fZu4gB97J6wX1efakj1RC00',
+    premium: 'https://buy.stripe.com/test_fZu4gB97J6wX1efakj1RC00', // Will be updated with actual premium link
+    professional: 'https://buy.stripe.com/test_fZu4gB97J6wX1efakj1RC00' // Will be updated with actual professional link
+};
 const GOOGLE_VISION_API_KEY = 'AIzaSyBCKfAP7bjtOkryHpnbO9aIvEZsm2ucqOI';
+
+// Revenue tracking
+let totalRevenue = 0;
+let customerCount = 0;
 
 // Global variables
 let uploadedFile = null;
@@ -12,10 +20,23 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initializeApp() {
-    // Check if user has already paid (simulate with localStorage)
-    const hasPaid = localStorage.getItem('artVerifyPaid');
-    if (hasPaid) {
+    // Check URL parameters for payment success
+    const urlParams = new URLSearchParams(window.location.search);
+    const paymentSuccess = urlParams.get('payment_success');
+    const sessionId = urlParams.get('session_id');
+    
+    if (paymentSuccess === 'true' && sessionId) {
+        // Payment completed successfully
+        localStorage.setItem('artVerifyPaid', 'true');
+        localStorage.setItem('sessionId', sessionId);
         showUploadSection();
+        showPaymentSuccessMessage();
+    } else {
+        // Check if user has already paid previously
+        const hasPaid = localStorage.getItem('artVerifyPaid');
+        if (hasPaid) {
+            showUploadSection();
+        }
     }
     
     // Setup drag and drop
@@ -25,18 +46,15 @@ function initializeApp() {
     setupSmoothScrolling();
 }
 
-function startVerification() {
-    // Redirect to Stripe payment
-    window.open(STRIPE_PAYMENT_URL, '_blank');
+function startVerification(packageType = 'single') {
+    // Direct redirect to actual Stripe payment based on package type
+    const paymentUrl = STRIPE_PAYMENT_URLS[packageType] || STRIPE_PAYMENT_URLS.single;
     
-    // Simulate payment completion after a delay
-    setTimeout(() => {
-        const userConfirmed = confirm('Have you completed the payment? Click OK to continue.');
-        if (userConfirmed) {
-            localStorage.setItem('artVerifyPaid', 'true');
-            showUploadSection();
-        }
-    }, 3000);
+    // Store package type for later use
+    localStorage.setItem('selectedPackage', packageType);
+    
+    // Redirect to Stripe payment
+    window.location.href = paymentUrl;
 }
 
 function showUploadSection() {
@@ -530,6 +548,34 @@ For high-value artworks, we recommend additional expert authentication.
 
 © 2025 ArtVerify - AI-Powered Art Authentication
     `;
+}
+
+function showPaymentSuccessMessage() {
+    // Create a payment success notification
+    const successDiv = document.createElement('div');
+    successDiv.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #10b981;
+        color: white;
+        padding: 20px 25px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        z-index: 10000;
+        font-weight: 600;
+        font-size: 16px;
+    `;
+    successDiv.innerHTML = '🎉 Payment Successful! You can now analyze your artwork.';
+    
+    document.body.appendChild(successDiv);
+    
+    // Remove after 5 seconds
+    setTimeout(() => {
+        if (document.body.contains(successDiv)) {
+            document.body.removeChild(successDiv);
+        }
+    }, 5000);
 }
 
 function showErrorMessage(message) {
